@@ -7,29 +7,10 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
-// /**
-//  * @OA\Info(
-//  *      version="1.0.0",
-//  *      title="Identityservice API Swagger JWT Laravel",
-//  *      description="L5 Swagger OpenApi description",
-//  *      @OA\Contact(
-//  *          email="darius@matulionis.lt"
-//  *      ),
-//  *     @OA\License(
-//  *         name="Apache 2.0",
-//  *         url="https://www.apache.org/licenses/LICENSE-2.0.html"
-//  *     )
-//  * )
-//  * 
-//  * @OA\Get(
-//  *     path="/",
-//  *     description="Home page",
-//  *     @OA\Response(response="default", description="Welcome page")
-//  * )
-//  */
+
 /**
  * @OA\Info(
- *    title="Identityservice API Swagger JWT Laravel",
+ *    title="Productservice API Swagger JWT Laravel",
  *    version="1.0.0",
  * ),
  *   @OA\SecurityScheme(

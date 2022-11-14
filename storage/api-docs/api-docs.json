@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Identityservice API Swagger JWT Laravel",
+        "title": "Productservice API Swagger JWT Laravel",
         "version": "1.0.0"
     },
     "servers": [
