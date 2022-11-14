@@ -21,7 +21,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register','me']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
     /**
@@ -29,58 +29,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    /**
-     * @OA\Post(
-     *    operationId="User login",
-     *    summary="User login",
-     *    description="User login",
-     *    tags={"Identity"},   
-    *     path="/login",
-    *     @OA\Parameter(
-     *          name="email",
-     *          description="Email Field",
-     *          required=true,
-     *          in="query",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *     ),
-     *     @OA\Parameter(
-     *          name="password",
-     *          description="Password",
-     *          required=true,
-     *          in="query",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *     ),
-    *     @OA\Response(response="200", description="Display a credential User."),
-    *     @OA\Response(response="201", description="Successful operation"),
-    *     @OA\Response(response="400", description="Bad Request"),
-    *     @OA\Response(response="401", description="Unauthenticated"),
-    *     @OA\Response(response="403", description="Forbidden")
-    * )
-    */
-    public function login()
-    {
-        $credentials = request(['email', 'password']);
     
-
-        if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-        try {
-            $user = auth()->userOrFail();
-        } catch (\Tymon\JWTAuth\Exceptions\UserNotDefinedException $e) {
-            return response()->json(['error' => 'user not found'], 401);
-        }
-
-        return $this->respondWithToken($token);
-        // return response()->json([
-        //     'token' => $this->respondWithToken($token)
-        //     'user' => $user
-        // ], 401);
-    }
 
     // /**
     //  * Get the authenticated User.
@@ -89,12 +38,12 @@ class AuthController extends Controller
     //  */
     /**
     * @OA\Get(
-    *    operationId="User me",
-    *    summary="User me",
-    *    description="User me",
+    *    operationId="User profile",
+    *    summary="User profile",
+    *    description="User profile",
     *    security={{ "bearerAuth": {} }},
     *    tags={"Identity"},   
-    *     path="/me",
+    *     path="/profile",
     *     @OA\Response(response="200", description="Display a credential User."),
     *     @OA\Response(response="201", description="Successful operation"),
     *     @OA\Response(response="400", description="Bad Request"),
@@ -102,7 +51,7 @@ class AuthController extends Controller
     *     @OA\Response(response="403", description="Forbidden")
     * )
     */
-    public function me(Request $request)
+    public function profile(Request $request)
     {
 
         $data = $request->header('authorization');
@@ -203,95 +152,7 @@ class AuthController extends Controller
     }
 
 
-      /**
-    * @OA\Post(
-    *    operationId="User registred",
-    *    summary="User registred",
-    *    description="User registred",
-    *    tags={"Identity"},   
-    *     path="/register",
-    *     @OA\Parameter(
-     *          name="email",
-     *          description="Email Field",
-     *          required=true,
-     *          in="query",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *     ),
-     *      @OA\Parameter(
-     *          name="username",
-     *          description="Username Field",
-     *          required=true,
-     *          in="query",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *     ),
-     *      @OA\Parameter(
-     *          name="firstname",
-     *          description="First Name",
-     *          required=true,
-     *          in="query",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *     ),
-     *      @OA\Parameter(
-     *          name="lastname",
-     *          description="Last Name",
-     *          required=true,
-     *          in="query",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *     ),
-     *     @OA\Parameter(
-     *          name="password",
-     *          description="Password",
-     *          required=true,
-     *          in="query",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *     ),
-     *  @OA\Parameter(
-     *          name="password2",
-     *          description="Password",
-     *          required=true,
-     *          in="query",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *     ),
-
-     *    @OA\Response(response="200", description="Create User credentials",
-     *     @OA\JsonContent(ref="#/components/schemas/User")),
-    *     @OA\Response(response="201", description="Successful operation",@OA\JsonContent(ref="#/components/schemas/User")),
-    *     @OA\Response(response="400", description="Bad Request"),
-    *     @OA\Response(response="401", description="Unauthenticated"),
-    *     @OA\Response(response="403", description="Forbidden")
-  
-    * )
-    */
-    public function register(Request $request)
-    {
-        $request_input = $request->input();
-        if(array_key_exists('password',  $request_input) && array_key_exists('password2',  $request_input)){
-            if ($request_input['password'] != $request_input['password2']){
-                return (new GeneralResponse)->default_json(
-                    $success=false,
-                    $message = "Success",
-                    $data= response()->json(User::all())->original,
-                    //$code= Response::HTTP_ACCEPTED
-                );
-            }
-        }
-        
-        $userController = new UserController;
-        return $userController->store($request);
-    }
-
+    
     /**
      * Get the token array structure.
      *

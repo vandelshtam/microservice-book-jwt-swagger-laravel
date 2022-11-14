@@ -13,10 +13,17 @@ use App\Http\Requests\UpdateBookRequest;
  */
 class BookController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('jwt.auth');        
+    }
+
     /**
      * @OA\Get(
      *  path="/books",
      *  operationId="indexBook",
+     *  security={{ "bearerAuth": {} }},
      *  tags={"Books"},
      *  summary="Get list of Book",
      *  description="Returns list of Book",
@@ -39,6 +46,7 @@ class BookController extends Controller
      *  operationId="storeBook",
      *  summary="Insert a new Book",
      *  description="Insert a new Book",
+     *  security={{ "bearerAuth": {} }},
      *  tags={"Books"},
      *  path="/books",
      *  @OA\RequestBody(
@@ -83,6 +91,7 @@ class BookController extends Controller
      *   summary="Show a Book from his Id",
      *   description="Show a Book from his Id",
      *   operationId="showBook",
+     *  security={{ "bearerAuth": {} }},
      *   tags={"Books"},
      *      @OA\Parameter(
      *          name="book_id",
@@ -131,6 +140,7 @@ class BookController extends Controller
      *   operationId="updateBook",
      *   summary="Update an existing Book",
      *   description="Update an existing Book",
+     *  security={{ "bearerAuth": {} }},
      *   tags={"Books"},
      *   path="/books/{book_id}",
      *      @OA\Parameter(
@@ -189,6 +199,7 @@ class BookController extends Controller
      *  summary="Delete a Book",
      *  description="Delete a Book",
      *  operationId="destroyBook",
+     *  security={{ "bearerAuth": {} }},
      *  tags={"Books"},
      *  @OA\Parameter(ref="#/components/parameters/Book--id"),
      *  @OA\Response(response=204,description="No content"),

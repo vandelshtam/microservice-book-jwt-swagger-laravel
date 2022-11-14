@@ -23,11 +23,11 @@ Route::group([
     'middleware' => 'api',
     'namespace' => 'App\Http\Controllers'
 ], function($router){
-    Route::post('login', ['as'=> 'login', 'uses'=> 'AuthController@login']);
-    Route::post('register', ['as'=> 'register', 'uses'=> 'AuthController@register']);
+    // Route::post('login', ['as'=> 'login', 'uses'=> 'AuthController@login']);
+    // Route::post('register', ['as'=> 'register', 'uses'=> 'AuthController@register']);
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
-    Route::get('me', 'AuthController@me');
+    Route::get('profile', 'AuthController@profile');
 
     Route::get('users', 'UserController@index');
     Route::post('users/store', 'UserController@store');

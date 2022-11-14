@@ -12,10 +12,16 @@ use Illuminate\Http\Response;
  */
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('jwt.auth');        
+    }
+    
     /**
      * @OA\Get(
      *  path="/products",
      *  operationId="indexProduct",
+     *  security={{ "bearerAuth": {} }},
      *  tags={"Products"},
      *  summary="Get list of Product",
      *  description="Returns list of Product",
@@ -38,6 +44,7 @@ class ProductController extends Controller
      *  operationId="storeProduct",
      *  summary="Insert a new Product",
      *  description="Insert a new Product",
+     *  security={{ "bearerAuth": {} }},
      *  tags={"Products"},
      *  path="/products",
      *  @OA\RequestBody(
@@ -82,6 +89,7 @@ class ProductController extends Controller
      *   summary="Show a Product from his Id",
      *   description="Show a Product from his Id",
      *   operationId="showProduct",
+     *   security={{ "bearerAuth": {} }},
      *   tags={"Products"},
      *   @OA\Parameter(ref="#/components/parameters/Product--id"),
      *   @OA\Response(
@@ -112,6 +120,7 @@ class ProductController extends Controller
      *   operationId="updateProduct",
      *   summary="Update an existing Product",
      *   description="Update an existing Product",
+     *   security={{ "bearerAuth": {} }},
      *   tags={"Products"},
      *   path="/products/{product_id}",
      *   @OA\Parameter(ref="#/components/parameters/Product--id"),
@@ -148,6 +157,7 @@ class ProductController extends Controller
      *  summary="Delete a Product",
      *  description="Delete a Product",
      *  operationId="destroyProduct",
+     *  security={{ "bearerAuth": {} }},
      *  tags={"Products"},
      *  @OA\Parameter(ref="#/components/parameters/Product--id"),
      *  @OA\Response(response=204,description="No content"),
