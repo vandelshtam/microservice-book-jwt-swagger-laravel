@@ -26,7 +26,6 @@ https://jwt-auth.readthedocs.io/en/develop/
 composer install
 ```
 - make env
-```bash
 cp .env.example .env
 ```
 - generate key
@@ -58,7 +57,7 @@ vendor/bin/sail up -d
 To create a fast crud with tests and open-api documentation with stubs customized:
 `php artisan make:model -c -f -m --api -R --test Product`
 
-Or
+# Or
 
 - start server
 ```bash
@@ -75,16 +74,5 @@ http://localhost:8000
 password: 1234567890
 ```
 
-# Setup - Docker is required
-
-```
-composer install
-vendor/bin/sail up -d
-```
-
-## Stubs Crud Simplify
-
-To create a fast crud with tests and open-api documentation with stubs customized:
-`php artisan make:model -c -f -m --api -R --test Product`
 # identityservice_swagger_jwt_laravel_2
 # microservice-book-jwt-swagger-laravel
